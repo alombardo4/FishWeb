@@ -1,0 +1,23 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  p Select Lighting Settings
+  .col-sm-12.well
+    form.form(name='form', ng-submit='sendLighting(form)')
+      .form-group
+        label Mode
+        input.form-control(type='number', required, name='mode', ng-model='lighting.mode')
+      .form-group
+        label Red
+        input.form-control(type='number', required, name='r', ng-model='lighting.r')
+      .form-group
+        label Green
+        input.form-control(type='number', required, name='g', ng-model='lighting.g')
+      .form-group
+        label Blue
+        input.form-control(type='number', required, name='b', ng-model='lighting.b')
+      .form-group
+        label Brightness
+        input.form-control(type='number', required, name='brightness', ng-model='lighting.brightness')
+      div
+        button.btn.btn-lg(type='submit')
+          | Send

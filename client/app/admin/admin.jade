@@ -1,5 +1,5 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container
+.container(ng-init='init()')
   p
     | The delete user and user index api routes are restricted to users with the 'admin' role.
   ul.list-group
@@ -9,3 +9,26 @@ div(ng-include='"components/navbar/navbar.html"')
       span.text-muted {{user.email}}
       a.trash(ng-click='delete(user)')
         span.glyphicon.glyphicon-trash.pull-right
+        
+  p
+    | You can set up your Particle Photon hardware information below:
+    .col-sm-12.well
+      form.form(name='form', ng-submit='saveHardware(form)')
+        .form-group
+          label Name
+          input.form-control(type='text', required, name='name', ng-model='hardware.name')
+        .form-group
+          label Hardware Identifier
+          input.form-control(type='text', required, name='identifier', ng-model='hardware.identifier')
+        .form-group
+          label Token
+          input.form-control(type='text', required, name='token', ng-model='hardware.token')
+        .form-group.has-error
+          p.help-block(ng-show='form.name.$error.required && form.token.$error.required && form.identifier.$error.required && submitted')
+            | Please fill in all fields
+          p.help-block {{ errors.other }}
+        p.success(ng-show="savedHardware")
+          | Hardware has been saved!
+        div
+          button.btn.btn-lg(type='submit')
+            | Save
