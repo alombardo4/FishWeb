@@ -4,7 +4,6 @@ angular.module('fishWebApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'btford.socket-io',
   'ui.router',
   'ui.bootstrap'
 ])
