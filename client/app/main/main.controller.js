@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fishWebApp')
-  .controller('MainCtrl', function ($scope, lightingService, $timeout) {
+  .controller('MainCtrl', function ($scope, lightingService, $timeout, feedingService) {
     $scope.updateColor = false;
     $scope.init = function() {
       $scope.lighting = {};
@@ -9,6 +9,19 @@ angular.module('fishWebApp')
       $scope.lighting.g = 255;
       $scope.lighting.b = 255;
       $scope.lighting.brightness = 255;
+      feedingService.getFeedings().then(function(result) {
+        $scope.allFeedings = result.data;
+        $scope.lastFeeding = $scope.allFeedings[0];
+      });
+    };
+
+    $scope.recordFeeding = function() {
+      feedingService.createFeeding().then(function() {
+        feedingService.getFeedings().then(function(result) {
+          $scope.allFeedings = result.data;
+          $scope.lastFeeding = $scope.allFeedings[0];
+        });
+      });
     };
 
     $scope.setDirect = function() {

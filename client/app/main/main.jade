@@ -1,5 +1,9 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container(ng-init="init()")
+  h2 Last Fed: {{lastFeeding.timeFed | date: 'M/d h:mm a'}}
+  .col-sm-12.well
+    div.btn-group
+      button.btn.btn-success(type='button' ng-click='recordFeeding()') Record Feeding
   h2 Select Lighting Settings
   .col-sm-12.well
 
@@ -31,3 +35,13 @@ div(ng-include='"components/navbar/navbar.html"')
         button.btn.btn-success(type='button' ng-click='setBrightness(255)') 100%
     .form-group
       p.text-success(ng-show="lightingMessage" ng-bind="lightingMessage")
+  h2 Historical Feedings
+  div.well
+    table.table
+      thead
+        tr
+          th.text-center Last Fed
+      tbody.text-center
+        tr(ng-repeat="feeding in allFeedings")
+          td {{feeding.timeFed | date: 'M/d h:mm a'}}
+    
