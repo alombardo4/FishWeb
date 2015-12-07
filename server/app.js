@@ -38,7 +38,7 @@ var CronJob = require('cron').CronJob;
 new CronJob('1 */5 * * * *', function(){
 	hardwareController.hardware(function(hardware) {
 
-		if (hardware.state === -1) {
+		if (hardware && hardware.state === -1) {
 			var time = new Date();
 			console.log('Updating standard at: ' + time.getHours() + ':' + time.getMinutes());
 			if ((time.getHours() > 2 && time.getHours() <= 6) || time.getHours() >= 20) {
