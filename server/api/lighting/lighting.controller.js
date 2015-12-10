@@ -21,6 +21,7 @@ exports.sendLighting = function(req, res) {
        form: {arg:command}},
        function(err,httpResponse,body) {
          hardware.state = req.body.mode;
+         hardware.command = command;
          hardware.save(function(err, hardware) {
            return res.send(hardware);
          });

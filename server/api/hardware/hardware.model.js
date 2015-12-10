@@ -9,7 +9,9 @@ var HardwareSchema  = new Schema({
   token: String,
   identifier: String,
   dateCreated: Date,
-  state: Number
+  state: Number,
+  command: String,
+  foodFlash: Boolean
 });
 
 

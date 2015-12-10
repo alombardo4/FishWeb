@@ -20,3 +20,9 @@ exports.create = function(req, res) {
     return res.json(result);
   });
 };
+
+exports.getLastFed = function(callback) {
+  Feeding.find().sort('-timeFed').limit(1).exec(function(err, result) {
+    callback(result[0].timeFed);
+  });
+};

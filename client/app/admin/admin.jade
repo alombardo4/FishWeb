@@ -23,6 +23,10 @@ div(ng-include='"components/navbar/navbar.html"')
         .form-group
           label Token
           input.form-control(type='text', required, name='token', ng-model='hardware.token')
+        .form-group.checkbox
+          label
+            input(type='checkbox', name='foodFlash', ng-model='hardware.foodFlash')
+            | Feeding Flash
         .form-group.has-error
           p.help-block(ng-show='form.name.$error.required && form.token.$error.required && form.identifier.$error.required && submitted')
             | Please fill in all fields
