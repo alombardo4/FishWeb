@@ -34,7 +34,6 @@ exports.sendLighting = function(req, res) {
     hardwareController.hardware(function(hardware) {
       hardware.state = req.body.mode;
       var time = new Date();
-      console.log(time.getHours() + ':' + time.getMinutes());
 
       if ((time.getHours() > 2 && time.getHours() <= 6) || time.getHours() >= 20) {
         //early morning/night

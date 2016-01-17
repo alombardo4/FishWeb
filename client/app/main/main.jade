@@ -2,7 +2,7 @@ div(ng-include='"components/navbar/navbar.html"')
 md-content(ng-init='init()' layout-fill layout-padding layout-margin)
   span(layout='row' layout-align='center center')
     md-card(layout='row' flex-gt-md='80')
-      md-card-content
+      md-card-content(flex='100')
         h2.md-card-title Last Fed: {{lastFeeding.timeFed | date: 'M/d h:mm a'}}
         md-button.md-primary.md-raised(ng-click='recordFeeding()') Record Feeding
 
@@ -27,7 +27,7 @@ md-content(ng-init='init()' layout-fill layout-padding layout-margin)
           md-slider.blue(ng-model='lighting.b' min='0' max='255' ng-change='setDirect()')
         span(layout='column')
           p Select Brightness
-          md-slider(ng-model='lighting.brightness' min='0' max='255' ng-change='setBrightness(brightness)')
+          md-slider(ng-model='lighting.brightness' min='0' max='255' ng-change='setDirect()')
   span(layout='row' layout-align='center center')
     md-card(layout='row' flex-gt-md='80')
       md-card-content(flex='100')

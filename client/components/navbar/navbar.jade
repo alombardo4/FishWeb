@@ -1,10 +1,10 @@
 md-toolbar.md-whiteframe-1dp(ng-controller='NavbarCtrl')
   div.md-toolbar-tools
     md-button(href='/') FishWeb
-    md-button(ng-repeat='item in menu' ng-class='{md-raised: isActive(item.link)}' ng-href='{{item.link}}') {{item.title}}
+    md-button(ng-show='bigScreen' ng-repeat='item in menu' ng-class='{"md-raised": isActive(item.link)}' ng-href='{{item.link}}') {{item.title}}
     span(flex) 
-    md-button(ng-show='isAdmin()' ng-class='{md-raised: isActive("/admin")}' ng-href='/admin') Admin
-    md-button(ng-hide='isLoggedIn()' ng-class='{md-raised: isActive("/login")}' ng-href='/login') Login
-    md-button(ng-hide='isLoggedIn()' ng-class='{md-raised: isActive("/signup")}' ng-href='/signup') Sign Up
-    md-button(ng-show='isLoggedIn()' ng-class='{md-raised: isActive("/settings")}' ng-href='/settings') Settings
-    md-button(ng-show='isLoggedIn()' ng-class='{md-raised: isActive("/logout")}' ng-click="logout()") Logout
+    md-button(ng-show='isAdmin()' ng-class='{"md-raised": isActive("/admin")}' ng-href='/admin') Admin
+    md-button(ng-hide='isLoggedIn()' ng-class='{"md-raised": isActive("/login")}' ng-href='/login') Login
+    md-button(ng-hide='isLoggedIn()' ng-show='bigScreen' ng-class='{"md-raised": isActive("/signup")}' ng-href='/signup') Sign Up
+    md-button(ng-show='isLoggedIn() && bigScreen' ng-class='{"md-raised": isActive("/settings")}' ng-href='/settings') Settings
+    md-button(ng-show='isLoggedIn() && bigScreen' ng-class='{"md-raised": isActive("/logout")}' ng-click="logout()") Logout

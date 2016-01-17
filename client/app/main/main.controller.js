@@ -25,17 +25,8 @@ angular.module('fishWebApp')
     };
 
     $scope.setDirect = function() {
-      $scope.updateColor = true;
-      var values = $scope.lighting.color.split('(')[1];
-      values = values.split(')')[0];
-      var parts = values.split(',');
-      $scope.lighting.r = parseInt(parts[0]);
-      $scope.lighting.g = parseInt(parts[1]);
-      $scope.lighting.b = parseInt(parts[2]);
-      var lighting = $scope.lighting;
-      lighting.mode = 0;
-      console.log(lighting);
-      updateLighting(lighting);
+      $scope.lighting.mode = 0;
+      updateLighting($scope.lighting);
     };
 
     $scope.setRainbowCycle = function() {
@@ -83,27 +74,8 @@ angular.module('fishWebApp')
       updateLighting(lighting);
     };
 
-    $scope.$watch('lighting.color', function() {
-      if ($scope.updateColor === true) {
-        $scope.setDirect();
-        $scope.updateColor = false;
-        $timeout(function() {
-            $scope.updateColor = true;
-        }, 250);
-      }
-
-    });
-
-
-    $scope.setBrightness = function(value) {
-      console.log(value);
-      $scope.lighting.brightness = Math.round(value);
-      $scope.setDirect();
-    };
-
     function updateLighting(lighting) {
       lightingService.sendLighting(lighting).then(function(result) {
-        console.log(result.data);
         $scope.lightingMessage = 'Lighting mode set to ';
         switch(result.data.state) {
           case -1:

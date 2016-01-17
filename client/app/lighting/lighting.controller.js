@@ -6,8 +6,7 @@ angular.module('fishWebApp')
 
     $scope.sendLighting = function(form) {
       if (form.$valid) {
-        lightingService.sendLighting($scope.lighting).then(function(response) {
-          console.log(response);
+        lightingService.sendLighting($scope.lighting).then(function() {
         });
       }
     };
