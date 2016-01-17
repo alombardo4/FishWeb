@@ -2,10 +2,7 @@
 
 angular.module('fishWebApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $mdMedia) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+    $scope.menu = [];
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
