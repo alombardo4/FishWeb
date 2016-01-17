@@ -1,47 +1,38 @@
 div(ng-include='"components/navbar/navbar.html"')
-.container(ng-init="init()")
-  h2 Last Fed: {{lastFeeding.timeFed | date: 'M/d h:mm a'}}
-  .col-sm-12.well
-    div.btn-group
-      button.btn.btn-success(type='button' ng-click='recordFeeding()') Record Feeding
-  h2 Select Lighting Settings
-  .col-sm-12.well
+md-content(ng-init='init()' layout-fill layout-padding layout-margin)
+  span(layout='row' layout-align='center center')
+    md-card(layout='row' flex-gt-md='80')
+      md-card-content
+        h2.md-card-title Last Fed: {{lastFeeding.timeFed | date: 'M/d h:mm a'}}
+        md-button.md-primary.md-raised(ng-click='recordFeeding()') Record Feeding
 
-    div.btn-group
-      button.btn.btn-success(type='button' ng-click='setStandard()') Standard
-      button.btn.btn-default(type='button' ng-click='setDirect()') Direct
-      button.btn.btn-default(type='button' ng-click='setRainbowCycle()') Rainbow Cycle
-      button.btn.btn-default(type='button' ng-click='setChill()') Chill
-      button.btn.btn-default(type='button' ng-click='setAquatic()') Aquatic
-      button.btn.btn-default(type='button' ng-click='setHell()') Hell
-      button.btn.btn-default(type='button' ng-click='setVegas()') Vegas
-      button.btn.btn-danger(type='button' ng-click='setOff()') Off
-    div(style="margin-top: 5px")
-      p Select Color
-      color-picker(ng-model="lighting.color" ng-change='updateColor()' color-picker-swatch-bootstrap="true" color-picker-alpha='false' color-picker-format="'rgb'" color-picker-swatch-only='false')
-    div(style="margin-top: 5px")
-      p Select Brightness
-      div.btn-group
-        button.btn.btn-danger(type='button' ng-click='setBrightness(0)') Off
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.1)') 10%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.2)') 20%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.3)') 30%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.4)') 40%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.5)') 50%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.6)') 60%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.7)') 70%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.8)') 80%
-        button.btn.btn-default(type='button' ng-click='setBrightness(255*.9)') 90%
-        button.btn.btn-success(type='button' ng-click='setBrightness(255)') 100%
-    .form-group
-      p.text-success(ng-show="lightingMessage" ng-bind="lightingMessage")
-  h2 Historical Feedings
-  div.well
-    table.table
-      thead
-        tr
-          th.text-center Last Fed
-      tbody.text-center
-        tr(ng-repeat="feeding in allFeedings")
-          td {{feeding.timeFed | date: 'M/d h:mm a'}}
-    
+  span(layout='row' layout-align='center center')
+    md-card(layout='row' flex-gt-md='80')
+      md-card-content(flex='100')
+        h2.md-card-title Lighting Mode
+        span(layout='row' layout-align='center center' layout-wrap)
+          md-button.md-raised.md-primary(ng-click='setStandard()') Standard
+          md-button.md-raised(ng-click='setDirect()') Direct
+          md-button.md-raised(ng-click='setRainbowCycle()') Rainbow Cycle
+          md-button.md-raised(ng-click='setChill()') Chill
+          md-button.md-raised(ng-click='setAquatic()') Aquatic
+          md-button.md-raised(ng-click='setHell()') Hell
+          md-button.md-raised(ng-click='setVegas()') Vegas
+          md-button.md-raised.md-warn(ng-click='setOff()') Off
+        span(layout='column')
+          p Select Color
+          span(style='width: 20px; height: 20px;' ng-style='{"background-color" : "rgb(" + lighting.r + "," + lighting.g + "," + lighting.b + ")"}')
+          md-slider.red(ng-model='lighting.r' min='0' max='255' ng-change='setDirect()')
+          md-slider.green(ng-model='lighting.g' min='0' max='255' ng-change='setDirect()')
+          md-slider.blue(ng-model='lighting.b' min='0' max='255' ng-change='setDirect()')
+        span(layout='column')
+          p Select Brightness
+          md-slider(ng-model='lighting.brightness' min='0' max='255' ng-change='setBrightness(brightness)')
+  span(layout='row' layout-align='center center')
+    md-card(layout='row' flex-gt-md='80')
+      md-card-content(flex='100')
+        h2.md-card-title Historical Feedings
+        md-list
+          md-list-item.text-center(ng-repeat='feeding in allFeedings track by $index')
+            h3(flex='100') {{feeding.timeFed | date: 'M/d h:mm a'}}
+            md-divider(ng-if='!$last')
