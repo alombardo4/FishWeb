@@ -35,13 +35,13 @@ exports.sendLighting = function(req, res) {
       hardware.state = req.body.mode;
       var time = new Date();
 
-      if ((time.getHours() > 2 && time.getHours() <= 6) || time.getHours() >= 20) {
+      if ((time.getHours() > 18 && time.getHours() <= 23) || (time.getHours() >= 6 && time.getHours() < 8)) { //6pm to 11pm and 6am to 8am
         //early morning/night
-        updateLight(hardware, 255, 255, 120, 100);
-      } else if (time.getHours() >= 0 && time.getHours() <= 2) {
+        updateLight(hardware, 255, 255, 120, 180);
+      } else if (time.getHours() > 23 && time.getHours() <= 6) { //11pm to 6am
         //late night
-        updateLight(hardware, 255, 255, 120, 25);
-      } else if (time.getHours() >= 7 && time.getHours() <= 19) {
+        updateLight(hardware, 255, 255, 120, 0);
+      } else if (time.getHours() >= 8 && time.getHours() <= 18) { //8 am to 6pm
         //day time
         updateLight(hardware, 255, 255, 120, 255);
       }
