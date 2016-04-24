@@ -32,15 +32,24 @@
 .navbar-text {
   margin-left: 15px;
 }
-md-slider.green .md-thumb:after, md-slider.green .md-focus-ring,  md-slider.green .md-sign, md-slider.green .md-track.md-track-fill{
+md-slider.green.md-default-theme ._md-thumb:after, md-slider.green ._md-thumb:after{
   background-color: green !important;
   border-color: green !important;
 }
-md-slider.red .md-thumb:after, md-slider.red .md-focus-ring,  md-slider.red .md-sign, md-slider.red .md-track.md-track-fill{
+md-slider.red.md-default-theme ._md-thumb:after, md-slider.red ._md-thumb:after{
   background-color: red !important;
   border-color: red !important;
 }
-md-slider.blue .md-thumb:after, md-slider.blue .md-focus-ring,  md-slider.blue .md-sign, md-slider.blue .md-track.md-track-fill{
+md-slider.blue.md-default-theme ._md-thumb:after, md-slider.blue ._md-thumb:after{
   background-color: blue !important;
   border-color: blue !important;
+}
+md-slider.md-default-theme.red ._md-track._md-track-fill, md-slider.red ._md-track._md-track-fill {
+  background-color: red !important;
+}
+md-slider.md-default-theme.blue ._md-track._md-track-fill, md-slider.blue ._md-track._md-track-fill {
+  background-color: blue !important;
+}
+md-slider.md-default-theme.green ._md-track._md-track-fill, md-slider.green ._md-track._md-track-fill {
+  background-color: green !important;
 }

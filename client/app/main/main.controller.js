@@ -13,6 +13,15 @@ angular.module('fishWebApp')
         $scope.allFeedings = result.data;
         $scope.lastFeeding = $scope.allFeedings[0];
       });
+      lightingService.getLighting().then(function(result) {
+        $scope.currentMode = result.data.lightingStatus;
+        var rgbString = result.data.lightingRGB;
+        var rgbParts = rgbString.split(' ');
+        $scope.lighting.r = parseInt(rgbParts[0]);
+        $scope.lighting.g = parseInt(rgbParts[1]);
+        $scope.lighting.b = parseInt(rgbParts[2]);
+        $scope.lighting.brightness = parseInt(rgbParts[3]);
+      });
     };
 
     $scope.recordFeeding = function() {
@@ -76,33 +85,13 @@ angular.module('fishWebApp')
 
     function updateLighting(lighting) {
       lightingService.sendLighting(lighting).then(function(result) {
-        $scope.lightingMessage = 'Lighting mode set to ';
-        switch(result.data.state) {
-          case -1:
-            $scope.lightingMessage += 'standard.';
-            break;
-          case 0:
-            $scope.lightingMessage += 'direct.';
-            break;
-          case 1:
-            $scope.lightingMessage += 'rainbow cycle.';
-            break;
-          case 2:
-            $scope.lightingMessage += 'chill.';
-            break;
-          case 3:
-            $scope.lightingMessage += 'aquatic.';
-            break;
-          case 4:
-            $scope.lightingMessage += 'hell.';
-            break;
-          case 5:
-            $scope.lightingMessage += 'Vegas.';
-            break;
-          case 6:
-            $scope.lightingMessage += 'off.';
-            break;
-        }
+        $scope.currentMode = result.data.lightingStatus;
+        var rgbString = result.data.lightingRGB;
+        var rgbParts = rgbString.split(' ');
+        $scope.lighting.r = parseInt(rgbParts[0]);
+        $scope.lighting.g = parseInt(rgbParts[1]);
+        $scope.lighting.b = parseInt(rgbParts[2]);
+        $scope.lighting.brightness = parseInt(rgbParts[3]);
       });
     }
 

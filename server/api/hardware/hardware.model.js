@@ -11,7 +11,9 @@ var HardwareSchema  = new Schema({
   dateCreated: Date,
   state: Number,
   command: String,
-  foodFlash: Boolean
+  foodFlash: Boolean,
+  lightingStatus: String,
+  lightingRGB: String
 });
 
 

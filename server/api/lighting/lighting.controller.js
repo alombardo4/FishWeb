@@ -12,16 +12,43 @@ exports.index = function(req, res) {
   res.json([]);
 };
 
+exports.currentLighting = function(req, res) {
+  Hardware.find().limit(1).sort('-dateCreated').exec(function(err, result) {
+    var hardware = result[0];
+    return res.json(hardware);
+  });
+};
+
 
 exports.sendLighting = function(req, res) {
   if (req.body.mode !== -1) {
     var command = req.body.mode + ' ' + req.body.r + ' ' + req.body.g + ' ' + req.body.b + ' ' + req.body.brightness;
-    hardwareController.hardware(function(hardware) {
+    Hardware.findOne().sort('-dateCreated').exec(function(err, hardware) {
+      if (req.body.mode === -1) {
+        hardware.lightingStatus = 'Standard';
+      } else if (req.body.mode === 0) {
+        hardware.lightingStatus = 'Direct';
+        hardware.lightingRGB = req.body.r + ' ' + req.body.g + ' ' + req.body.b + ' ' + req.body.brightness;
+      } else if (req.body.mode === 1) {
+        hardware.lightingStatus = 'Rainbow Cycle';
+      } else if (req.body.mode === 2) {
+        hardware.lightingStatus = 'Chill';
+      } else if (req.body.mode === 3) {
+        hardware.lightingStatus = 'Aquatic';
+      } else if (req.body.mode === 4) {
+        hardware.lightingStatus = 'Hell';
+      } else if (req.body.mode === 5) {
+        hardware.lightingStatus = 'Vegas';
+      } else if (req.body.mode === 6) {
+        hardware.lightingStatus = 'Off';
+      }
       request.post({url:'https://api.particle.io/v1/devices/' + hardware.identifier + '/updateLights?access_token=' + hardware.token,
        form: {arg:command}},
        function(err,httpResponse,body) {
          hardware.state = req.body.mode;
          hardware.command = command;
+
+
          hardware.save(function(err, hardware) {
            return res.send(hardware);
          });
@@ -33,6 +60,7 @@ exports.sendLighting = function(req, res) {
   } else {
     hardwareController.hardware(function(hardware) {
       hardware.state = req.body.mode;
+      hardware.lightingStatus = 'Standard';
       var time = new Date();
 
       if ((time.getHours() > 18 && time.getHours() <= 23) || (time.getHours() >= 6 && time.getHours() < 8)) { //6pm to 11pm and 6am to 8am

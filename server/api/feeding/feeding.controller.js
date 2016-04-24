@@ -8,7 +8,7 @@ var Feeding = require('./feeding.model');
 
 // Gets a list of Feedings
 exports.index = function(req, res) {
-  Feeding.find().sort('-timeFed').limit(20).exec(function(err, result) {
+  Feeding.find().sort('-timeFed').limit(10).exec(function(err, result) {
     return res.json(result);
   });
 };
