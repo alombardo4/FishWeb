@@ -6,8 +6,7 @@ angular.module('fishWebApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngMaterial',
-  'color.picker'
+  'ngMaterial'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
     $urlRouterProvider

@@ -43,14 +43,15 @@ new CronJob('1 */5 * * * *', function(){
 		if (hardware && hardware.state === -1) {
 			var time = new Date();
 			console.log('Updating standard at: ' + time.getHours() + ':' + time.getMinutes());
-			if ((time.getHours() > 18 && time.getHours() <= 23) || (time.getHours() >= 6 && time.getHours() < 8)) { //6pm to 11pm and 6am to 8am
-        //early morning/night
+			// only on for 10 hours...from 8am to 6pm
+			if ((time.getHours() > 17 && time.getHours() <= 18) || (time.getHours() >= 8 && time.getHours() < 9)) {
+        //early morning/night -> 8-9am 5-6pm
         updateLight(hardware, 255, 255, 120, 180);
-      } else if (time.getHours() > 23 && time.getHours() <= 6) { //11pm to 6am
-        //late night
+      } else if (time.getHours() > 18 && time.getHours() < 8) {
+        //late night -> 0-8am, 6-11:59pm
         updateLight(hardware, 255, 255, 120, 0);
-      } else if (time.getHours() >= 8 && time.getHours() <= 18) { //8 am to 6pm
-        //day time
+      } else if (time.getHours() >= 9 && time.getHours() <= 17) {
+        //day time -> 9am to 5pm
         updateLight(hardware, 255, 255, 120, 255);
       }
 		}

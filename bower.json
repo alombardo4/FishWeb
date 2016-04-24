@@ -14,8 +14,7 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~3.10.1",
     "angular-ui-router": "~0.2.15",
-    "angular-color-picker": "angularjs-color-picker#~0.6.11",
-    "angular-material": "~1.0.2"
+    "angular-material": "~1.1.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
