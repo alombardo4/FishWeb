@@ -37,7 +37,7 @@ server.listen(config.port, config.ip, function () {
 
 var CronJob = require('cron').CronJob;
 //job for updating standard mode
-new CronJob('1 */5 * * * *', function(){
+new CronJob('1 */1 * * * *', function(){
 	hardwareController.hardware(function(hardware) {
 
 		if (hardware && hardware.state === -1) {
@@ -47,12 +47,15 @@ new CronJob('1 */5 * * * *', function(){
 			if ((time.getHours() > 17 && time.getHours() <= 18) || (time.getHours() >= 8 && time.getHours() < 9)) {
         //early morning/night -> 8-9am 5-6pm
         updateLight(hardware, 255, 255, 120, 180);
+				console.log('Updated to 180');
       } else if (time.getHours() > 18 && time.getHours() < 8) {
         //late night -> 0-8am, 6-11:59pm
         updateLight(hardware, 255, 255, 120, 0);
+				console.log('Updated to 0');
       } else if (time.getHours() >= 9 && time.getHours() <= 17) {
         //day time -> 9am to 5pm
         updateLight(hardware, 255, 255, 120, 255);
+				console.log('Updated to 255');
       }
 		}
 
