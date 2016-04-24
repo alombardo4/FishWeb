@@ -48,7 +48,7 @@ new CronJob('1 */1 * * * *', function(){
         //early morning/night -> 8-9am 5-6pm
         updateLight(hardware, 255, 255, 120, 180);
 				console.log('Updated to 180 at ' + time.getHours());
-      } else if (time.getHours() > 18 && time.getHours() < 8) {
+      } else if (time.getHours() > 18 || time.getHours() < 8) {
         //late night -> 0-8am, 6-11:59pm
         updateLight(hardware, 255, 255, 120, 0);
 				console.log('Updated to 0 at ' + time.getHours());
