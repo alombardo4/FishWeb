@@ -86,12 +86,6 @@ angular.module('fishWebApp')
     function updateLighting(lighting) {
       lightingService.sendLighting(lighting).then(function(result) {
         $scope.currentMode = result.data.lightingStatus;
-        var rgbString = result.data.lightingRGB;
-        var rgbParts = rgbString.split(' ');
-        $scope.lighting.r = parseInt(rgbParts[0]);
-        $scope.lighting.g = parseInt(rgbParts[1]);
-        $scope.lighting.b = parseInt(rgbParts[2]);
-        $scope.lighting.brightness = parseInt(rgbParts[3]);
       });
     }
 
